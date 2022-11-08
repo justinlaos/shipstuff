@@ -2,12 +2,41 @@ require "test_helper"
 
 class ProductsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @product = products(:one)
+    @product = Product.first
   end
 
   test "should get index" do
     get products_url, as: :json
     assert_response :success
+  end
+
+  test "should get index with correct params" do
+    get products_url + "?length=26&width=16&height=22&weight=50", as: :json
+    assert_response :success
+  end
+
+  test "should get product with correct params that fits params" do
+    get products_url + "?length=26&width=16&height=22&weight=50", as: :json
+    json_response = response.body
+    assert_equal "Checked Bag", json_response
+  end
+
+  test "should NOT get product with incorrect params" do
+    get products_url + "?length=test&width=16&height=22&weight=50", as: :json
+    json_response = response.body
+    assert_equal "Not valid input. Please include only numbers larger than 0", json_response
+  end
+
+  test "should NOT get product with not all params" do
+    get products_url + "?&width=16&height=22&weight=50", as: :json
+    json_response = response.body
+    assert_equal "Missing input. Need length, width, height, weight", json_response
+  end
+
+  test "should NOT get product with correct params but not product that fits" do
+    get products_url + "?length=12&width=160&height=220&weight=500 ", as: :json
+    json_response = response.body
+    assert_equal "No product fits your query. Please check its correct", json_response
   end
 
   test "should create product" do

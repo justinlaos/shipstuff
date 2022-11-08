@@ -2,7 +2,7 @@
 
 one:
   name: MyString
-  type: 
+  type: "golf"
   length: 1
   width: 1
   height: 1
@@ -10,7 +10,7 @@ one:
 
 two:
   name: MyString
-  type: 
+  type: "golf"
   length: 1
   width: 1
   height: 1
