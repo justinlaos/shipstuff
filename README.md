@@ -2,6 +2,9 @@
 
 Welcome to ShipStuff
 
+This is a Rails API with a React Frontend App. 
+The frontend is located in another repo
+
 * Version
 This app uses Rails 7 and Ruby 2.7.0
     
@@ -16,6 +19,12 @@ CD into repo
 ```rails s```
 
 then run the frontend 
+
+in frontend repo run
+
+```npm start```
+
+Open [http://localhost:3001](http://localhost:3001) to view it in your browser.
 
 * How to run the test suite
 ```rake db:seed RAILS_ENV=test --trace```
