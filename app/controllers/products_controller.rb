@@ -59,7 +59,8 @@ class ProductsController < ApplicationController
     end
 
     def product_size_query(length, width, height, weight)
-      Product.where({'length' => {'$gte' => length.to_i}}).where({'width' => {'$gte' => width.to_i}}).where({'height' => {'$gte' => height.to_i}}).where({'weight' => {'$gte' => weight.to_i}})
+      products = Product.where({'length' => {'$gte' => length.to_i}}).where({'width' => {'$gte' => width.to_i}}).where({'height' => {'$gte' => height.to_i}}).where({'weight' => {'$gte' => weight.to_i}})
+      products = products.sort_by(&:length).sort_by(&:width).sort_by(&:height).sort_by(&:weight)
     end
 
     def check_params_exist(params)
